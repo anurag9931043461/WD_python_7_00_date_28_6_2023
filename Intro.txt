@@ -1,0 +1,129 @@
+Introduction: 
+Programming: Prgramming is a set of code which we pass to a machine to get any specifiv output.
+
+Language: 
+
+> High level language: Human speaking language, 5000+ 
+> Machine level language :9000+,  Binary language(0,1) 
+
+
+--------------------------------------------------------------
+python:
+Guido van rossum.
+
+Amoeba distributed operating system.(language used: ABC programming language )
+
+python:monty python flying circus-->  45 --6years 
+
+------------------------------------------------------------
+Disadvantage: 
+> Execution time is high
+> it is not good for mobile application development.
+
+
+Advantage:
+---------
+python web development(internet application)
+python developer(desktop application)
+data preprocessing 
+AI
+etc..
+
+----------------------------------------------------------------
+python installer/setup:
+--------------------
+
+IDLE:(Integrated development learning environment): for  I/O operation.
+interpreter:conversion of language on both side
+pip
+Stardard library:
+Documentation : 
+
+
+----------------------------------------------------------------------
+
+VScode(Visual studio code )
+anconda
+pycharm
+
+
+
+-------------------------------------------------------------------------------------------
+Syllabus:
+----------
+
+> variable
+> comment
+> datatype:
+    > integer
+    > float
+    > string
+    > list
+    > tuple 
+    > set
+    > dictionary
+    > frozenset
+    > boolean
+    > complex
+> casting
+> input()
+> operator
+> conditional programming
+    >if else
+        > nested if else
+        > ternary operator
+    > if elif else
+        > nested if elif else
+> Loop
+    > For Loop 
+        > nested for loop
+        > pattern using single for loop
+        > pattern using nested for loop
+        > comprehension
+            > list comprehension
+            > tuple comprehension(generator)
+            > set comprehension
+            > dictionary comprehension
+        > keyword
+            > break 
+            > continue
+            > pass 
+    > while loop
+        > nested while loop
+        > pattern using single while loop
+        > pattern using nested while loop
+    > keyword
+        > break
+        > continue
+        > pass
+function:
+    > def 
+    > return 
+    > local variable
+    > global variable
+    > local scope 
+    > global scope
+    > argument
+        > default argument
+        > positional argument
+        > keyword arguement
+        > arbitrary positional arguement
+        > arbitrary keyword arguement
+    > lambda 
+    > nested function
+    > decorator 
+    > generator(yield)
+
+> multitasking
+    > thread
+    > process
+    > life cycle thread
+        > generator of thread block
+        > runnable block
+        > running block 
+        > blocked state
+        > terminate block
+
+
+
+
