@@ -1,0 +1,243 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 24
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd7                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use wd7;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_wd7 |
++---------------+
+| restra        |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from restra;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    2 | Mohan                |   34.32 |
+|    3 | sohan                |  43.343 |
+|    4 | dhava                |    NULL |
+|    5 | Aishwariya krishna   | 1265.76 |
+| NULL | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
++------+----------------------+---------+
+7 rows in set (0.00 sec)
+
+mysql> create table collage(Enrollment int primary key,name varchar(50) not null,branch varchar(50) not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from collage;
+Empty set (0.00 sec)
+
+mysql> insert into collage values(1,'krishna','MCA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
++------------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> desc collage;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Enrollment | int         | NO   | PRI | NULL    |       |
+| name       | varchar(50) | NO   |     | NULL    |       |
+| branch     | varchar(50) | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into collage values(2,"Mohan","CS"),(3,"Sohan","BCA"),(4,"Pintu","BBA");
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
+|          2 | Mohan   | CS     |
+|          3 | Sohan   | BCA    |
+|          4 | Pintu   | BBA    |
++------------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> insert into collage(Enrollment,branch) values(5,"Mechanical");
+ERROR 1364 (HY000): Field 'name' doesn't have a default value
+mysql> insert into collage(Enrollment, name) values(5,"Suraj");
+ERROR 1364 (HY000): Field 'branch' doesn't have a default value
+mysql> insert into collage (name,branch) values("Suraj","Mechanical");
+ERROR 1364 (HY000): Field 'Enrollment' doesn't have a default value
+mysql> update collage set name="Simran" where enrollment=4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
+|          2 | Mohan   | CS     |
+|          3 | Sohan   | BCA    |
+|          4 | Simran  | BBA    |
++------------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> insert into collage values(5,"krish","BBA"),(6,"Monika","MCA"),(7,"Rahul","LFT"),("8","Dhava","B. Vok");
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
+|          2 | Mohan   | CS     |
+|          3 | Sohan   | BCA    |
+|          4 | Simran  | BBA    |
+|          5 | krish   | BBA    |
+|          6 | Monika  | MCA    |
+|          7 | Rahul   | LFT    |
+|          8 | Dhava   | B. Vok |
++------------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql> insert into collage values(11,"Kartik","CS");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
+|          2 | Mohan   | CS     |
+|          3 | Sohan   | BCA    |
+|          4 | Simran  | BBA    |
+|          5 | krish   | BBA    |
+|          6 | Monika  | MCA    |
+|          7 | Rahul   | LFT    |
+|          8 | Dhava   | B. Vok |
+|         11 | Kartik  | CS     |
++------------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from collage where name like 'M%';
++------------+--------+--------+
+| Enrollment | name   | branch |
++------------+--------+--------+
+|          2 | Mohan  | CS     |
+|          6 | Monika | MCA    |
++------------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
+|          2 | Mohan   | CS     |
+|          3 | Sohan   | BCA    |
+|          4 | Simran  | BBA    |
+|          5 | krish   | BBA    |
+|          6 | Monika  | MCA    |
+|          7 | Rahul   | LFT    |
+|          8 | Dhava   | B. Vok |
+|         11 | Kartik  | CS     |
++------------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from collage where name like 'S%n';
++------------+--------+--------+
+| Enrollment | name   | branch |
++------------+--------+--------+
+|          3 | Sohan  | BCA    |
+|          4 | Simran | BBA    |
++------------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from collage where name like '____n';
++------------+-------+--------+
+| Enrollment | name  | branch |
++------------+-------+--------+
+|          2 | Mohan | CS     |
+|          3 | Sohan | BCA    |
++------------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
+|          2 | Mohan   | CS     |
+|          3 | Sohan   | BCA    |
+|          4 | Simran  | BBA    |
+|          5 | krish   | BBA    |
+|          6 | Monika  | MCA    |
+|          7 | Rahul   | LFT    |
+|          8 | Dhava   | B. Vok |
+|         11 | Kartik  | CS     |
++------------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from collage where 'K_r%';
+Empty set, 1 warning (0.00 sec)
+
+mysql> select * from collage where name like 'K_r%';
++------------+--------+--------+
+| Enrollment | name   | branch |
++------------+--------+--------+
+|         11 | Kartik | CS     |
++------------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> delete from collage where enrollment =11;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
+|          2 | Mohan   | CS     |
+|          3 | Sohan   | BCA    |
+|          4 | Simran  | BBA    |
+|          5 | krish   | BBA    |
+|          6 | Monika  | MCA    |
+|          7 | Rahul   | LFT    |
+|          8 | Dhava   | B. Vok |
++------------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql>

@@ -124,6 +124,27 @@ function:
         > blocked state
         > terminate block
 
+> garbage collector
 
+> progrmming style:
+    >top line programming
+    > procedural programming/functional programming 
+    > OOPs(95%)
+
+> OOPs
+    > blueprint/class
+    > object
+        > constructor
+        > instance variable
+        > class variable
+        > static methods.
+        > class methods.
+    > encapsulation(privatization: data private)
+    > abstraction
+    > inheritance
+    > polymorphism
+        > overloading
+        > overriding 
+    
 
 

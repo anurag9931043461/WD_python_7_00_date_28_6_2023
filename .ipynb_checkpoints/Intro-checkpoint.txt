@@ -96,6 +96,55 @@ Syllabus:
         > break
         > continue
         > pass
+function:
+    > def 
+    > return 
+    > local variable
+    > global variable
+    > local scope 
+    > global scope
+    > argument
+        > default argument
+        > positional argument
+        > keyword arguement
+        > arbitrary positional arguement
+        > arbitrary keyword arguement
+    > lambda 
+    > nested function
+    > decorator 
+    > generator(yield)
 
+> multitasking
+    > thread
+    > process
+    > life cycle thread
+        > generator of thread block
+        > runnable block
+        > running block 
+        > blocked state
+        > terminate block
+
+> garbage collector
+
+> progrmming style:
+    >top line programming
+    > procedural programming/functional programming 
+    > OOPs(95%)
+
+> OOPs
+    > blueprint/class
+    > object
+        > constructor
+        > instance variable
+        > class variable
+        > static methods.
+        > class methods.
+    > encapsulation(privatization: data private)
+    > abstraction
+    > inheritance
+    > polymorphism
+        > overloading
+        > overriding 
+    
 
 
