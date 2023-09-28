@@ -1,0 +1,405 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 35
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd5                |
+| wd7                |
+| world              |
++--------------------+
+10 rows in set (0.00 sec)
+
+mysql> use wd7;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_wd7 |
++---------------+
+| collage       |
+| restra        |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
+|          2 | Mohan   | CS     |
+|          3 | Sohan   | BCA    |
+|          4 | Simran  | BBA    |
+|          5 | krish   | BBA    |
+|          6 | Monika  | MCA    |
+|          7 | Rahul   | LFT    |
+|          8 | Dhava   | B. Vok |
++------------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select * from restra;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    2 | Mohan                |   34.32 |
+|    3 | sohan                |  43.343 |
+|    4 | dhava                |    NULL |
+|    5 | Aishwariya krishna   | 1265.76 |
+| NULL | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
++------+----------------------+---------+
+7 rows in set (0.00 sec)
+
+mysql> desc collage;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Enrollment | int         | NO   | PRI | NULL    |       |
+| name       | varchar(50) | NO   |     | NULL    |       |
+| branch     | varchar(50) | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into collage(enrollment) values(9);
+ERROR 1364 (HY000): Field 'name' doesn't have a default value
+mysql> select * from collage;
++------------+---------+--------+
+| Enrollment | name    | branch |
++------------+---------+--------+
+|          1 | krishna | MCA    |
+|          2 | Mohan   | CS     |
+|          3 | Sohan   | BCA    |
+|          4 | Simran  | BBA    |
+|          5 | krish   | BBA    |
+|          6 | Monika  | MCA    |
+|          7 | Rahul   | LFT    |
+|          8 | Dhava   | B. Vok |
++------------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select * from restra;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    2 | Mohan                |   34.32 |
+|    3 | sohan                |  43.343 |
+|    4 | dhava                |    NULL |
+|    5 | Aishwariya krishna   | 1265.76 |
+| NULL | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
++------+----------------------+---------+
+7 rows in set (0.00 sec)
+
+mysql> update restra set s_n =7 where bill>32 and bill<32.50;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from restral
+    -> ;
+ERROR 1146 (42S02): Table 'wd7.restral' doesn't exist
+mysql> select * from restra;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    2 | Mohan                |   34.32 |
+|    3 | sohan                |  43.343 |
+|    4 | dhava                |    NULL |
+|    5 | Aishwariya krishna   | 1265.76 |
+|    7 | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
++------+----------------------+---------+
+7 rows in set (0.00 sec)
+
+mysql> insert into restra(name) values("Sohan");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from restra;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    2 | Mohan                |   34.32 |
+|    3 | sohan                |  43.343 |
+|    4 | dhava                |    NULL |
+|    5 | Aishwariya krishna   | 1265.76 |
+|    7 | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
+| NULL | Sohan                |    NULL |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> update restra set sn=8, bill= 43.99 where s_n=NULL or bill=NULL;
+ERROR 1054 (42S22): Unknown column 'sn' in 'field list'
+mysql> update restra set s_n=8, bill= 43.99 where s_n=NULL or bill=NULL;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from restra;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    2 | Mohan                |   34.32 |
+|    3 | sohan                |  43.343 |
+|    4 | dhava                |    NULL |
+|    5 | Aishwariya krishna   | 1265.76 |
+|    7 | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
+| NULL | Sohan                |    NULL |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> update restra set s_n=8, bill= 43.99 where s_n=4 or name="Sohan";
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from restra;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    2 | Mohan                |   34.32 |
+|    8 | sohan                |   43.99 |
+|    8 | dhava                |   43.99 |
+|    5 | Aishwariya krishna   | 1265.76 |
+|    7 | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
+|    8 | Sohan                |   43.99 |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from restra order by bill asc;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    7 | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
+|    2 | Mohan                |   34.32 |
+|    8 | sohan                |   43.99 |
+|    8 | dhava                |   43.99 |
+|    8 | Sohan                |   43.99 |
+|    5 | Aishwariya krishna   | 1265.76 |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from restra order by bill;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    7 | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
+|    2 | Mohan                |   34.32 |
+|    8 | sohan                |   43.99 |
+|    8 | dhava                |   43.99 |
+|    8 | Sohan                |   43.99 |
+|    5 | Aishwariya krishna   | 1265.76 |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from restra order by name;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    5 | Aishwariya krishna   | 1265.76 |
+|    5 | Aishwariya Prajapati |   32.56 |
+|    8 | dhava                |   43.99 |
+|    7 | dhava                |   32.43 |
+|    1 | krishna              |   12.32 |
+|    2 | Mohan                |   34.32 |
+|    8 | sohan                |   43.99 |
+|    8 | Sohan                |   43.99 |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from restra order by s_n desc;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    8 | sohan                |   43.99 |
+|    8 | dhava                |   43.99 |
+|    8 | Sohan                |   43.99 |
+|    7 | dhava                |   32.43 |
+|    5 | Aishwariya krishna   | 1265.76 |
+|    5 | Aishwariya Prajapati |   32.56 |
+|    2 | Mohan                |   34.32 |
+|    1 | krishna              |   12.32 |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from restra order by bill desc;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    5 | Aishwariya krishna   | 1265.76 |
+|    8 | sohan                |   43.99 |
+|    8 | dhava                |   43.99 |
+|    8 | Sohan                |   43.99 |
+|    2 | Mohan                |   34.32 |
+|    5 | Aishwariya Prajapati |   32.56 |
+|    7 | dhava                |   32.43 |
+|    1 | krishna              |   12.32 |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from restra order by bill desc limit 3;
++------+--------------------+---------+
+| s_n  | name               | bill    |
++------+--------------------+---------+
+|    5 | Aishwariya krishna | 1265.76 |
+|    8 | sohan              |   43.99 |
+|    8 | dhava              |   43.99 |
++------+--------------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from restra order by bill desc;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    5 | Aishwariya krishna   | 1265.76 |
+|    8 | sohan                |   43.99 |
+|    8 | dhava                |   43.99 |
+|    8 | Sohan                |   43.99 |
+|    2 | Mohan                |   34.32 |
+|    5 | Aishwariya Prajapati |   32.56 |
+|    7 | dhava                |   32.43 |
+|    1 | krishna              |   12.32 |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from restra order by bill desc limit 1,1;
++------+-------+-------+
+| s_n  | name  | bill  |
++------+-------+-------+
+|    8 | Sohan | 43.99 |
++------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from restra order by bill desc limit 1,2;
++------+-------+-------+
+| s_n  | name  | bill  |
++------+-------+-------+
+|    8 | sohan | 43.99 |
+|    8 | dhava | 43.99 |
++------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from restra order by bill desc limit 2,2;
++------+-------+-------+
+| s_n  | name  | bill  |
++------+-------+-------+
+|    8 | dhava | 43.99 |
+|    8 | Sohan | 43.99 |
++------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> -- aggrigate function (avg(),sum(),min(),max(),distinct(),count())
+mysql> select * from restra;
++------+----------------------+---------+
+| s_n  | name                 | bill    |
++------+----------------------+---------+
+|    1 | krishna              |   12.32 |
+|    2 | Mohan                |   34.32 |
+|    8 | sohan                |   43.99 |
+|    8 | dhava                |   43.99 |
+|    5 | Aishwariya krishna   | 1265.76 |
+|    7 | dhava                |   32.43 |
+|    5 | Aishwariya Prajapati |   32.56 |
+|    8 | Sohan                |   43.99 |
++------+----------------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select avg(bill) from restra;
++--------------------+
+| avg(bill)          |
++--------------------+
+| 188.67000198364258 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select min(bill) from restra;
++-----------+
+| min(bill) |
++-----------+
+|     12.32 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select avg(bill), min(bill),max(bill),count(bill),sum(bill), distinct(bill) from restra;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'distinct(bill) from restra' at line 1
+mysql> select avg(bill), min(bill),max(bill),count(bill),sum(bill) from restra;
++--------------------+-----------+-----------+-------------+--------------------+
+| avg(bill)          | min(bill) | max(bill) | count(bill) | sum(bill)          |
++--------------------+-----------+-----------+-------------+--------------------+
+| 188.67000198364258 |     12.32 |   1265.76 |           8 | 1509.3600158691406 |
++--------------------+-----------+-----------+-------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct(bill) from restra;
++---------+
+| bill    |
++---------+
+|   12.32 |
+|   34.32 |
+|   43.99 |
+| 1265.76 |
+|   32.43 |
+|   32.56 |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> -- nested query using in
+mysql> select min(bill) from restra;
++-----------+
+| min(bill) |
++-----------+
+|     12.32 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from restra where bill in (select min(bill) from restra);
++------+---------+-------+
+| s_n  | name    | bill  |
++------+---------+-------+
+|    1 | krishna | 12.32 |
++------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> select name,bill from restra where bill in (select min(bill) from restra);
++---------+-------+
+| name    | bill  |
++---------+-------+
+| krishna | 12.32 |
++---------+-------+
+1 row in set (0.00 sec)
+
+mysql> select name from restra where bill in (select min(bill) from restra);
++---------+
+| name    |
++---------+
+| krishna |
++---------+
+1 row in set (0.00 sec)
