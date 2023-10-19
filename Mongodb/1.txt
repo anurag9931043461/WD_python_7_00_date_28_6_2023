@@ -1,0 +1,16 @@
+mongodb command;
+----------------
+
+> CRUD:
+------
+Create document 
+		> insertOne()
+		> insertMany()
+
+Read document:
+		> find()
+		> findOne()
+
+Update document:
+		> updateOne()
+		> updateMany()

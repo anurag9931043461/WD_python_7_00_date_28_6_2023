@@ -1,0 +1,130 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> -- foreign key primary key, composite key
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd5                |
+| wd7                |
+| we10               |
+| we2                |
+| we4                |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> use wd7;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_wd7 |
++---------------+
+| college       |
+| government    |
+| hostel        |
+| restra        |
+| shubidha      |
++---------------+
+5 rows in set (0.00 sec)
+
+mysql> create table college2(enrollment int primary key, name varchar(50) not null, branch char(30) not null);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table hostel2(roll int primary key, room int not null, foreign key(roll) references college2(enrollment));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into college2 values(1,"dhava","Science"),(2,"Mukesh","Maths"),(3,"Krishna","Art");
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from college2;
++------------+---------+---------+
+| enrollment | name    | branch  |
++------------+---------+---------+
+|          1 | dhava   | Science |
+|          2 | Mukesh  | Maths   |
+|          3 | Krishna | Art     |
++------------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into hostel2 values(1,202),(2,202);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from hostel2;
++------+------+
+| roll | room |
++------+------+
+|    1 |  202 |
+|    2 |  202 |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> insert into hostel2 values(10,205);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`wd7`.`hostel2`, CONSTRAINT `hostel2_ibfk_1` FOREIGN KEY (`roll`) REFERENCES `college2` (`enrollment`))
+mysql> insert into college2 values(10,"Santosh","Art");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hostel2 values(10,205);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> -- composit key
+mysql> create table family(name varchar(40),father char(40),mother char(40),location varchar(100), primary key(name,father,mother,location));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into family values("Krishna","Sunil","Suman","Ballia UP");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into family values("Vikki","Sunil","Suman","Ballia UP");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into family values("Bablu","Prahalad","Rajkumari","Ballia UP");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into family values("Mohan","Rahul","Rita","Ballia UP");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into family values("Krishna","Sunil","Suman","Ballia UP");
+ERROR 1062 (23000): Duplicate entry 'Krishna-Sunil-Suman-Ballia UP' for key 'family.PRIMARY'
+mysql> select * from family;
++---------+----------+-----------+-----------+
+| name    | father   | mother    | location  |
++---------+----------+-----------+-----------+
+| Bablu   | Prahalad | Rajkumari | Ballia UP |
+| Krishna | Sunil    | Suman     | Ballia UP |
+| Mohan   | Rahul    | Rita      | Ballia UP |
+| Vikki   | Sunil    | Suman     | Ballia UP |
++---------+----------+-----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> desc family;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| name     | varchar(40)  | NO   | PRI | NULL    |       |
+| father   | char(40)     | NO   | PRI | NULL    |       |
+| mother   | char(40)     | NO   | PRI | NULL    |       |
+| location | varchar(100) | NO   | PRI | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>

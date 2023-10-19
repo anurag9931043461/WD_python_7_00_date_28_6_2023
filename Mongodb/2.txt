@@ -1,0 +1,279 @@
+Microsoft Windows [Version 10.0.19045.3570]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\nnkri>monogsh
+'monogsh' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\nnkri>mongosh
+Current Mongosh Log ID: 652e906b631af737e6cb1bd4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2
+Using MongoDB:          7.0.2
+Using Mongosh:          2.0.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-10-17T13:43:27.172+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin    40.00 KiB
+config   84.00 KiB
+local    72.00 KiB
+wd12    144.00 KiB
+wd2      72.00 KiB
+wd7     144.00 KiB
+test> use wd7
+switched to db wd7
+wd7> show collections
+college
+school
+wd7> db.college.find()
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c90"), name: 'Dhava' }
+]
+wd7> db.school.find()
+[
+  {
+    _id: ObjectId("652d44a0a0d030ef1d5ee731"),
+    name: 'Krishna',
+    age: 27
+  },
+  {
+    _id: ObjectId("652d4563a0d030ef1d5ee732"),
+    name: 'Dhava',
+    status: 'young'
+  }
+]
+wd7> db.college.find
+db.college.find               db.college.findOne            db.college.findOneAndDelete   db.college.findOneAndReplace
+db.college.findOneAndUpdate
+
+wd7> db.college.find();
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c90"), name: 'Dhava' }
+]
+wd7> db.college.findOne({name:"dhava"});
+null
+wd7> db.college.findOne({name:"Dhava"});
+{ _id: ObjectId("652d474a3fd2673200493c90"), name: 'Dhava' }
+wd7> db.college.update
+db.college.updateMany         db.college.updateOne          db.college.updateSearchIndex
+
+wd7> db.college.updateOne({name:"Dhava"},{$set:{name:"dhava"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+wd7> db.college.find();
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c90"), name: 'dhava' }
+]
+wd7> db.college.updateOne({name:"Dhava"},{$set:{age:40}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+wd7> db.college.find();
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c90"), name: 'dhava' }
+]
+wd7> db.college.updateOne({name:"dhava"},{$set:{age:40}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+wd7> db.college.find();
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c90"), name: 'dhava', age: 40 }
+]
+wd7> db.college.insert({})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("652e9367631af737e6cb1bd5") }
+}
+wd7> db.college.insert({name:"Miss Aiswariya",age:25})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("652e93c7631af737e6cb1bd6") }
+}
+wd7> db.college.find();
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c90"), name: 'dhava', age: 40 },
+  { _id: ObjectId("652e9367631af737e6cb1bd5") },
+  {
+    _id: ObjectId("652e93c7631af737e6cb1bd6"),
+    name: 'Miss Aiswariya',
+    age: 25
+  }
+]
+wd7> db.college.update
+db.college.updateMany         db.college.updateOne          db.college.updateSearchIndex
+
+wd7> db.college.updateOne({age:25},{$set:{name:"Miss Aishwariya"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+wd7> db.college.find();
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 22 },
+  { _id: ObjectId("652d474a3fd2673200493c90"), name: 'dhava', age: 40 },
+  { _id: ObjectId("652e9367631af737e6cb1bd5") },
+  {
+    _id: ObjectId("652e93c7631af737e6cb1bd6"),
+    name: 'Miss Aishwariya',
+    age: 25
+  }
+]
+wd7> db.college.update
+db.college.updateMany         db.college.updateOne          db.college.updateSearchIndex
+
+wd7> db.college.updateMany({},{$set:{age:18}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 6,
+  modifiedCount: 6,
+  upsertedCount: 0
+}
+wd7> db.college.find()
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d474a3fd2673200493c90"), name: 'dhava', age: 18 },
+  { _id: ObjectId("652e9367631af737e6cb1bd5"), age: 18 },
+  {
+    _id: ObjectId("652e93c7631af737e6cb1bd6"),
+    name: 'Miss Aishwariya',
+    age: 18
+  }
+]
+wd7> db.college.delete
+db.college.deleteMany  db.college.deleteOne
+
+wd7> db.college.deleteOne({name:"dhava"})
+{ acknowledged: true, deletedCount: 1 }
+wd7> db.college.find()
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652e9367631af737e6cb1bd5"), age: 18 },
+  {
+    _id: ObjectId("652e93c7631af737e6cb1bd6"),
+    name: 'Miss Aishwariya',
+    age: 18
+  }
+]
+wd7> db.college.deleteOne({_id:""})
+wd7>
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+wd7> db.college.deleteOne({_id:"652e9367631af737e6cb1bd5"})
+{ acknowledged: true, deletedCount: 0 }
+wd7> db.college.find()
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652e9367631af737e6cb1bd5"), age: 18 },
+  {
+    _id: ObjectId("652e93c7631af737e6cb1bd6"),
+    name: 'Miss Aishwariya',
+    age: 18
+  }
+]
+wd7> db.college.deleteOne({_id:ObjectId("652e9367631af737e6cb1bd5")})
+{ acknowledged: true, deletedCount: 1 }
+wd7> db.college.find()
+[
+  { _id: ObjectId("652d46af3fd2673200493c8d"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 18 },
+  {
+    _id: ObjectId("652e93c7631af737e6cb1bd6"),
+    name: 'Miss Aishwariya',
+    age: 18
+  }
+]
+wd7> db.college.deleteOne({age:18})
+{ acknowledged: true, deletedCount: 1 }
+wd7> db.college.find()
+[
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan', age: 18 },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan', age: 18 },
+  {
+    _id: ObjectId("652e93c7631af737e6cb1bd6"),
+    name: 'Miss Aishwariya',
+    age: 18
+  }
+]
+wd7> db.college.find({},{name:1});
+[
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan' },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan' },
+  {
+    _id: ObjectId("652e93c7631af737e6cb1bd6"),
+    name: 'Miss Aishwariya'
+  }
+]
+wd7> db.college.find({},{name:1,_id:0});
+[ { name: 'Mohan' }, { name: 'Mohan' }, { name: 'Miss Aishwariya' } ]
+wd7> db.college.find({},{age:1,_id:0});
+[ { age: 18 }, { age: 18 }, { age: 18 } ]
+wd7> db.college.find({},{age:1,_id:0,name:1});
+[
+  { name: 'Mohan', age: 18 },
+  { name: 'Mohan', age: 18 },
+  { name: 'Miss Aishwariya', age: 18 }
+]
+wd7> db.college.find({},{name:1});
+[
+  { _id: ObjectId("652d46eb3fd2673200493c8e"), name: 'Mohan' },
+  { _id: ObjectId("652d474a3fd2673200493c8f"), name: 'Mohan' },
+  {
+    _id: ObjectId("652e93c7631af737e6cb1bd6"),
+    name: 'Miss Aishwariya'
+  }
+]
+wd7> db.college.find({},{name:1,_id:0});
+[ { name: 'Mohan' }, { name: 'Mohan' }, { name: 'Miss Aishwariya' } ]
+wd7>
+
+

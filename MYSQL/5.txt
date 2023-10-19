@@ -1,0 +1,163 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd5                |
+| wd7                |
+| we10               |
+| we2                |
+| we4                |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> use wd7;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_wd7 |
++---------------+
+| college       |
+| hostel        |
+| restra        |
++---------------+
+3 rows in set (0.00 sec)
+
+mysql> create table government(emp_id int primary key,name varchar(50),trade varchar(40));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table shubidha(emp int, facility varchar(40));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into government values(1,"Dhava","IAS"),(2,"Sunjay","IPS"),(3,"Mukesh","SDM"),(4,"Rajni","NRI"),(5,"Sonu","Actor"),(6,"Lxshman","Director"),(7,"Krishna","AI Consultant");
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from government;
++--------+---------+---------------+
+| emp_id | name    | trade         |
++--------+---------+---------------+
+|      1 | Dhava   | IAS           |
+|      2 | Sunjay  | IPS           |
+|      3 | Mukesh  | SDM           |
+|      4 | Rajni   | NRI           |
+|      5 | Sonu    | Actor         |
+|      6 | Lxshman | Director      |
+|      7 | Krishna | AI Consultant |
++--------+---------+---------------+
+7 rows in set (0.00 sec)
+
+mysql> insert into shubidha values(1,"accomodation"),(2,"educational"),(6,"medical"),(20,"medical");
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from shubidha;
++------+--------------+
+| emp  | facility     |
++------+--------------+
+|    1 | accomodation |
+|    2 | educational  |
+|    6 | medical      |
+|   20 | medical      |
++------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> -- inner join ,left join , right join, full outer join/full join
+mysql> select * from government inner join shubidha on government.emp_id=shubidha.emp;
++--------+---------+----------+------+--------------+
+| emp_id | name    | trade    | emp  | facility     |
++--------+---------+----------+------+--------------+
+|      1 | Dhava   | IAS      |    1 | accomodation |
+|      2 | Sunjay  | IPS      |    2 | educational  |
+|      6 | Lxshman | Director |    6 | medical      |
++--------+---------+----------+------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select government.emp_id,government.name,government.trade,shubidha.facility from government inner join shubidha on government.emp_id=shubidha.emp;
++--------+---------+----------+--------------+
+| emp_id | name    | trade    | facility     |
++--------+---------+----------+--------------+
+|      1 | Dhava   | IAS      | accomodation |
+|      2 | Sunjay  | IPS      | educational  |
+|      6 | Lxshman | Director | medical      |
++--------+---------+----------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select government.emp_id,government.name,government.trade,shubidha.facility from government left join shubidha on government.emp_id=shubidha.emp;
++--------+---------+---------------+--------------+
+| emp_id | name    | trade         | facility     |
++--------+---------+---------------+--------------+
+|      1 | Dhava   | IAS           | accomodation |
+|      2 | Sunjay  | IPS           | educational  |
+|      3 | Mukesh  | SDM           | NULL         |
+|      4 | Rajni   | NRI           | NULL         |
+|      5 | Sonu    | Actor         | NULL         |
+|      6 | Lxshman | Director      | medical      |
+|      7 | Krishna | AI Consultant | NULL         |
++--------+---------+---------------+--------------+
+7 rows in set (0.00 sec)
+
+mysql> select government.emp_id,government.name,government.trade,shubidha.facility from government right join shubidha on government.emp_id=shubidha.emp;
++--------+---------+----------+--------------+
+| emp_id | name    | trade    | facility     |
++--------+---------+----------+--------------+
+|      1 | Dhava   | IAS      | accomodation |
+|      2 | Sunjay  | IPS      | educational  |
+|      6 | Lxshman | Director | medical      |
+|   NULL | NULL    | NULL     | medical      |
++--------+---------+----------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select government.emp_id,government.name,government.trade,shubidha.facility from government right join shubidha on government.emp_id=shubidha.emp union select government.emp_id,government.name,government.trade,shubidha.facility from government left join shubidha on government.emp_id=shubidha.emp;
++--------+---------+---------------+--------------+
+| emp_id | name    | trade         | facility     |
++--------+---------+---------------+--------------+
+|      1 | Dhava   | IAS           | accomodation |
+|      2 | Sunjay  | IPS           | educational  |
+|      6 | Lxshman | Director      | medical      |
+|   NULL | NULL    | NULL          | medical      |
+|      3 | Mukesh  | SDM           | NULL         |
+|      4 | Rajni   | NRI           | NULL         |
+|      5 | Sonu    | Actor         | NULL         |
+|      7 | Krishna | AI Consultant | NULL         |
++--------+---------+---------------+--------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from government right join shubidha on government.emp_id=shubidha.emp union select government * from government left join shubidha on government.emp_id=shubidha.emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from government left join shubidha on government.emp_id=shubidha.emp' at line 1
+mysql> select * from government left join shubidha on government.emp_id=shubidha.emp union select * from government right join shubidha on government.emp_id=shubidha.emp;
++--------+---------+---------------+------+--------------+
+| emp_id | name    | trade         | emp  | facility     |
++--------+---------+---------------+------+--------------+
+|      1 | Dhava   | IAS           |    1 | accomodation |
+|      2 | Sunjay  | IPS           |    2 | educational  |
+|      3 | Mukesh  | SDM           | NULL | NULL         |
+|      4 | Rajni   | NRI           | NULL | NULL         |
+|      5 | Sonu    | Actor         | NULL | NULL         |
+|      6 | Lxshman | Director      |    6 | medical      |
+|      7 | Krishna | AI Consultant | NULL | NULL         |
+|   NULL | NULL    | NULL          |   20 | medical      |
++--------+---------+---------------+------+--------------+
+8 rows in set (0.00 sec)
+
+mysql>
